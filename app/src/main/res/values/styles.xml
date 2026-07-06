@@ -1,0 +1,92 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:navigationBarColor">@color/cyber_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="CyberSectionLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textColor">@color/cyber_cyan</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="CyberListItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/cyber_list_item</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">14dp</item>
+    </style>
+
+    <style name="CyberListTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/cyber_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CyberListSubTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@color/cyber_muted</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="CyberHelpImage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:background">@drawable/cyber_image_frame</item>
+        <item name="android:maxHeight">900dp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="CyberMenuItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:background">@drawable/cyber_list_item</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">14dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingRight">14dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+
+    <style name="CyberMenuItemDanger" parent="CyberMenuItem">
+        <item name="android:background">@drawable/cyber_button_secondary</item>
+    </style>
+
+    <style name="CyberMenuTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/cyber_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CyberMenuTitleDanger" parent="CyberMenuTitle">
+        <item name="android:textColor">#FFF0E8</item>
+    </style>
+        
+</resources>

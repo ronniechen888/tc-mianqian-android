@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/cyber_bg"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/cyber_panel"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="16dp">
+
+        <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/cyber_button_secondary"
+                android:contentDescription="返回"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/btn_back"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="软件设置"
+                android:textColor="@color/cyber_cyan"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+            <TextView style="@style/CyberSectionLabel" android:text="VERSION"/>
+            <LinearLayout style="@style/CyberListItem" android:id="@+id/version_card">
+                <TextView style="@style/CyberListTitle" android:text="软件版本"/>
+                <TextView style="@style/CyberListSubTitle" android:id="@+id/version" android:text="当前软件版本"/>
+            </LinearLayout>
+
+            <TextView style="@style/CyberSectionLabel" android:text="FEEDBACK"/>
+            <LinearLayout style="@style/CyberListItem" android:id="@+id/bugfeed" android:onClick="email_fk">
+                <TextView style="@style/CyberListTitle" android:text="意见反馈"/>
+                <TextView style="@style/CyberListSubTitle" android:text="意见反馈或 Bug 提交"/>
+            </LinearLayout>
+
+            <TextView style="@style/CyberSectionLabel" android:text="GUIDE"/>
+            <LinearLayout style="@style/CyberListItem" android:id="@+id/softhelp" android:onClick="help_api">
+                <TextView style="@style/CyberListTitle" android:text="配置文档"/>
+                <TextView style="@style/CyberListSubTitle" android:text="软件基本使用教程"/>
+            </LinearLayout>
+
+            <TextView style="@style/CyberSectionLabel" android:text="SERVICE"/>
+            <LinearLayout style="@style/CyberListItem" android:id="@+id/setservice1" android:onClick="dc_qx">
+                <TextView style="@style/CyberListTitle" android:text="开启电池白名单"/>
+                <TextView style="@style/CyberListSubTitle" android:text="检测应用是否加入白名单优化"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/CyberListItem" android:id="@+id/setservice" android:onClick="service_start">
+                <TextView style="@style/CyberListTitle" android:text="后台/息屏保活"/>
+                <TextView style="@style/CyberListSubTitle" android:text="提高应用的存活率避免被杀"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/state_pm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/cyber_list_item"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                    <TextView style="@style/CyberListTitle" android:text="开启/关闭屏幕常亮模式"/>
+                    <TextView style="@style/CyberListSubTitle" android:text="此功能可实现永不息屏，降低掉单率"/>
+                </LinearLayout>
+
+                <Switch
+                        android:id="@+id/state_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="state_swit"/>
+            </LinearLayout>
+
+            <TextView style="@style/CyberSectionLabel" android:text="ABOUT"/>
+            <LinearLayout style="@style/CyberListItem" android:id="@+id/softabout" android:onClick="vmq_Pro_gy">
+                <TextView style="@style/CyberListTitle" android:text="关于"/>
+                <TextView style="@style/CyberListSubTitle" android:text="开发人员及相关信息"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

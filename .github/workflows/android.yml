@@ -1,0 +1,276 @@
+# .github/workflows/android.yml
+# Android 项目持续集成工作流配置
+# 功能：自动构建、测试、打包 Android 应用并生成 Release 发布
+name: Android CI
+
+# 触发条件配置
+on:
+  # 代码推送触发（每次 push 自动构建）
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  # 拉取请求触发
+  pull_request:
+    branches: [ main, master ]
+  # 手动触发配置
+  workflow_dispatch:
+    inputs:
+      # 构建类型选择参数
+      build_type:
+        description: '构建类型'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - both
+          - debug
+          - release
+      # 是否创建 Release 参数
+      create_release:
+        description: '创建 GitHub Release'
+        required: false
+        default: 'false'
+        type: boolean
+
+# 任务定义
+jobs:
+  # 构建任务
+  build:
+    # 运行环境
+    runs-on: ubuntu-latest
+
+    # 定义作业级别的环境变量
+    env:
+      DEBUG_APK_PATH: app/build/outputs/apk/debug/app-debug.apk
+      RELEASE_APK_PATH: app/build/outputs/apk/release/app-release.apk
+      UNSIGNED_APK_PATH: app/build/outputs/apk/release/app-release-unsigned.apk
+      KEYSTORE_DEFAULT_PATH: app/keystore/keystore.jks
+
+    steps:
+      # 检出代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 配置 JDK 17 环境
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      # 配置 Gradle 构建工具
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+        with:
+          gradle-version: '8.13'
+          cache-disabled: false
+
+
+      # 根据触发方式确定构建类型，设置后续步骤的执行条件
+      # 输出变量：debug, release, is_manual, should_release
+      - name: Determine build type
+        id: build_type
+        run: |
+          BUILD_TYPE="${{ github.event.inputs.build_type }}"
+          
+          # 判断是否为手动触发
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # 手动触发：根据用户输入设置构建类型
+            if [[ "$BUILD_TYPE" == "debug" || "$BUILD_TYPE" == "both" ]]; then
+              echo "debug=true" >> $GITHUB_OUTPUT
+            else
+              echo "debug=false" >> $GITHUB_OUTPUT
+            fi
+          
+            if [[ "$BUILD_TYPE" == "release" || "$BUILD_TYPE" == "both" ]]; then
+              echo "release=true" >> $GITHUB_OUTPUT
+            else
+              echo "release=false" >> $GITHUB_OUTPUT
+            fi
+          
+            echo "is_manual=true" >> $GITHUB_OUTPUT
+            echo "should_release=${{ github.event.inputs.create_release }}" >> $GITHUB_OUTPUT
+          else
+            # 自动触发：默认构建所有类型（tag 推送时只构建 release）
+            if [[ "${{ github.ref }}" =~ ^refs/tags/ ]]; then
+              echo "debug=false" >> $GITHUB_OUTPUT
+              echo "release=true" >> $GITHUB_OUTPUT
+            else
+              echo "debug=true" >> $GITHUB_OUTPUT
+              echo "release=true" >> $GITHUB_OUTPUT
+            fi
+            echo "is_manual=false" >> $GITHUB_OUTPUT
+            echo "should_release=false" >> $GITHUB_OUTPUT
+          fi
+
+      # 构建 Debug 版本 APK（包含调试信息，已签名）
+      # 超时限制：30 分钟
+      - name: Build Debug APK
+        if: steps.build_type.outputs.debug == 'true'
+        timeout-minutes: 30
+        run: |
+          echo "🔨 开始构建 Debug APK..."
+          echo "Gradle 版本：$(gradle --version)"
+          echo "Java 版本：$JAVA_HOME"
+          
+          # 执行 Gradle 构建，排除 lint 检查
+          gradle assembleDebug \
+            -x lintDebug \
+            --stacktrace \
+            --no-daemon \
+            --info
+          
+          BUILD_RESULT=$?
+          
+          # 检查构建结果
+          if [ $BUILD_RESULT -eq 0 ]; then
+            echo "✅ Debug APK 构建成功"
+            if [ -f "${{ env.DEBUG_APK_PATH }}" ]; then
+              FILE_SIZE=$(ls -lh "${{ env.DEBUG_APK_PATH }}" | awk '{print $5}')
+              echo "📦 APK 文件已生成 (大小：${FILE_SIZE})"
+            else
+              echo "❌ APK 文件未找到！"
+              echo "搜索生成的 APK 文件："
+              find app/build/outputs -name "*.apk" -type f 2>/dev/null || echo "未找到任何 APK 文件"
+              exit 1
+            fi
+          else
+            echo "❌ Debug APK 构建失败，退出码：$BUILD_RESULT"
+            exit 1
+          fi
+
+      # 构建 Release 版本 APK（已签名）
+      # 超时限制：30 分钟
+      - name: Build Release APK
+        if: steps.build_type.outputs.release == 'true'
+        timeout-minutes: 30
+        env:
+          KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE || env.KEYSTORE_DEFAULT_PATH }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          echo "🔨 开始构建 Release APK（已签名版本）..."
+          echo "Gradle 版本：$(gradle --version)"
+          echo "Java 版本：$JAVA_HOME"
+          
+          # 检查签名文件是否存在
+          echo "📋 检查签名配置:"
+          ACTUAL_KEYSTORE="${KEYSTORE_FILE:-$KEYSTORE_DEFAULT_PATH}"
+          echo "  - 签名文件路径：${ACTUAL_KEYSTORE}"
+          
+          if [ -f "${ACTUAL_KEYSTORE}" ]; then
+            echo "✅ 签名文件验证通过"
+          else
+            echo "❌ 签名文件不存在：${ACTUAL_KEYSTORE}"
+            exit 1
+          fi
+          
+          # 验证环境变量（不泄露具体值）
+          echo "🔐 验证签名凭据:"
+          MISSING_VARS=()
+          [ -z "$KEYSTORE_PASSWORD" ] && MISSING_VARS+=("KEYSTORE_PASSWORD")
+          [ -z "$KEY_ALIAS" ] && MISSING_VARS+=("KEY_ALIAS")
+          
+          if [ ${#MISSING_VARS[@]} -gt 0 ]; then
+            echo "❌ 错误：以下签名凭据未设置：${MISSING_VARS[*]}"
+            echo "请在 GitHub Secrets 中配置这些变量"
+            exit 1
+          fi
+          echo "✅ 所有签名凭据已正确配置"
+          
+          # 执行 Gradle 构建
+          gradle assembleRelease \
+            -x lintRelease \
+            --stacktrace \
+            --no-daemon \
+            --info
+          
+          BUILD_RESULT=$?
+          
+          # 检查构建结果
+          if [ $BUILD_RESULT -eq 0 ]; then
+            echo "✅ Release APK 构建成功"
+          
+            # 优先检查已签名的 APK
+            if [ -f "${{ env.RELEASE_APK_PATH }}" ]; then
+              FILE_SIZE=$(ls -lh "${{ env.RELEASE_APK_PATH }}" | awk '{print $5}')
+              echo "📦 APK 文件已生成（已签名，大小：${FILE_SIZE})"
+          
+              # 验证签名完整性
+              if unzip -l "${{ env.RELEASE_APK_PATH }}" | grep -q "META-INF"; then
+                echo "✅ APK 签名验证通过"
+              else
+                echo "⚠️  APK 可能未正确签名"
+              fi
+          
+            # 检查未签名 APK（说明签名配置失败）
+            elif [ -f "${{ env.UNSIGNED_APK_PATH }}" ]; then
+              FILE_SIZE=$(ls -lh "${{ env.UNSIGNED_APK_PATH }}" | awk '{print $5}')
+              echo "📦 APK 文件已生成（未签名，大小：${FILE_SIZE})"
+              echo "❌ 错误：APK 未签名，签名配置失败"
+              echo ""
+              echo "排查步骤:"
+              echo "  1. 确认 keystore.jks 文件存在于正确位置"
+              echo "  2. 检查 GitHub Secrets 是否正确配置"
+              echo "  3. 验证 build.gradle 中的签名配置"
+              echo "  4. 确认密钥别名和密码是否正确"
+              exit 1
+            else
+              echo "❌ APK 文件未找到！"
+              echo ""
+              echo "搜索生成的 APK 文件："
+              find app/build/outputs -name "*.apk" -type f 2>/dev/null | head -10 || echo "未找到任何 APK 文件"
+              echo ""
+              echo "检查 build 目录结构："
+              ls -la app/build/outputs/apk/ 2>/dev/null || echo "APK 输出目录不存在"
+              exit 1
+            fi
+          else
+            echo "❌ Release APK 构建失败，退出码：$BUILD_RESULT"
+            echo ""
+            echo "检查 ProGuard 映射文件（如果启用了代码混淆）："
+            ls -la app/build/outputs/mapping/ 2>/dev/null || echo "无映射文件"
+            exit 1
+          fi
+
+      # 上传 Debug APK 为构建产物，保留 30 天
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        if: steps.build_type.outputs.debug == 'true'
+        with:
+          name: app-debug-${{ github.sha }}
+          path: ${{ env.DEBUG_APK_PATH }}
+          if-no-files-found: error
+          retention-days: 30
+
+      # 上传 Release APK 为构建产物，保留 30 天
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        if: steps.build_type.outputs.release == 'true'
+        with:
+          name: app-release-${{ github.sha }}
+          path: |
+            ${{ env.RELEASE_APK_PATH }}
+            ${{ env.UNSIGNED_APK_PATH }}
+          if-no-files-found: error
+          retention-days: 30
+
+      # 创建 GitHub Release 发布版本（仅在 tag 推送时执行）
+      # 自动附加构建产物并生成发布说明
+      - name: Create Release
+        id: create_release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            ${{ steps.build_type.outputs.debug == 'true' && env.DEBUG_APK_PATH || '' }}
+            ${{ steps.build_type.outputs.release == 'true' && env.RELEASE_APK_PATH || '' }}
+            ${{ steps.build_type.outputs.release == 'true' && env.UNSIGNED_APK_PATH || '' }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          fail_on_unmatched_files: true

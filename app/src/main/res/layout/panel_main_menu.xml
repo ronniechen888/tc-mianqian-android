@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="248dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/menu_popup_panel"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/menu_about"
+        style="@style/CyberMenuItem">
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/menu_gy"
+            android:tint="@color/cyber_cyan" />
+        <TextView
+            style="@style/CyberMenuTitle"
+            android:layout_marginStart="12dp"
+            android:text="@string/gy" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_setting"
+        style="@style/CyberMenuItem">
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/menu_setting"
+            android:tint="@color/cyber_cyan" />
+        <TextView
+            style="@style/CyberMenuTitle"
+            android:layout_marginStart="12dp"
+            android:text="@string/setting" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_exit"
+        style="@style/CyberMenuItemDanger">
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/menu_exit"
+            android:tint="#FF9A8B" />
+        <TextView
+            style="@style/CyberMenuTitleDanger"
+            android:layout_marginStart="12dp"
+            android:text="@string/tc" />
+    </LinearLayout>
+</LinearLayout>

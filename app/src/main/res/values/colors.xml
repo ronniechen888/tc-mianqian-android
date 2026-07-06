@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--标题栏颜色-->
+    <color name="colorPrimary">#FF024548</color>
+    <!--状态栏颜色-->
+    <color name="colorPrimaryDark">#050A16</color>
+    <color name="colorAccent">#00E5FF</color>
+    <color name="cyber_bg">#07111F</color>
+    <color name="cyber_text">#E8F7FF</color>
+    <color name="cyber_muted">#89A4B8</color>
+    <color name="cyber_cyan">#00E5FF</color>
+    <color name="cyber_green">#33FF99</color>
+
+    <color name="note_text_color">#E8F7FF</color>
+
+    <!-- QRCode scanner color begin -->
+    <color name="viewfinder_mask">#B0050A16</color>
+    <color name="result_view">#D0050A16</color>
+    <color name="viewfinder_frame">#AA00E5FF</color>
+    <color name="result_point_color">#C033FF99</color>
+    <color name="laser_color">#00E5FF</color>
+    <color name="corner_color">#33FF99</color>
+</resources>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/cyber_bg"
+        android:fillViewport="true"
+        tools:context=".ui.MainActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/nav_top_shell"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.08"
+                            android:text="TCMQ PAY NODE"
+                            android:textColor="@color/cyber_cyan"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/app_name"
+                            android:textColor="@color/cyber_text"
+                            android:textSize="21sp"
+                            android:textStyle="bold"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="24H PAYMENT MONITOR"
+                            android:textColor="@color/cyber_muted"
+                            android:textSize="11sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/cyber_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cyber_status_pill"
+                            android:fontFamily="monospace"
+                            android:text="OFFLINE"
+                            android:textColor="@color/cyber_green"
+                            android:textSize="11sp"
+                            android:textStyle="bold"/>
+
+                    <ImageButton
+                            android:id="@+id/btn_top_menu"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/nav_menu_button"
+                            android:contentDescription="打开菜单"
+                            android:onClick="showQuickMenu"
+                            android:padding="9dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/menu_setting"
+                            android:tint="@color/cyber_text"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/cyber_footer_line"/>
+
+            <TextView
+                    android:id="@+id/txt_host"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cyber_info_field"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/url"
+                    android:textColor="@color/cyber_text"
+                    android:textIsSelectable="true"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/txt_key"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/cyber_info_field"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/key"
+                    android:textColor="@color/cyber_text"
+                    android:textIsSelectable="true"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <Button
+                        android:id="@+id/btn_sm"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cyber_button_primary"
+                        android:maxLines="1"
+                        android:onClick="startQrCode"
+                        android:text="@string/sm"
+                        android:textColor="@color/cyber_text"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                <Button
+                        android:id="@+id/btn_input"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cyber_button_secondary"
+                        android:maxLines="1"
+                        android:onClick="doInput"
+                        android:text="@string/pz"
+                        android:textColor="@color/cyber_text"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                <Button
+                        android:id="@+id/btn_start"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cyber_button_primary"
+                        android:maxLines="1"
+                        android:onClick="doStart"
+                        android:text="@string/xt"
+                        android:textColor="@color/cyber_text"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                <Button
+                        android:id="@+id/btn_checkpush"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cyber_button_secondary"
+                        android:maxLines="1"
+                        android:onClick="checkPush"
+                        android:text="@string/jt"
+                        android:textColor="@color/cyber_text"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/btn_admin"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/cyber_button_secondary"
+                    android:maxLines="1"
+                    android:onClick="admin_url"
+                    android:text="@string/admin"
+                    android:textColor="@color/cyber_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/cyber_panel"
+                android:elevation="3dp"
+                android:minHeight="260dp"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:onClick="Logs"
+                        android:text="@string/ht_state"
+                        android:textColor="@color/cyber_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/sj_dl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/cyber_status_pill"
+                        android:maxLines="1"
+                        android:onClick="dl"
+                        android:text="@string/dl"
+                        android:textColor="@color/cyber_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/logs_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:minHeight="190dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/state_logs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/cyber_terminal"
+                        android:fontFamily="monospace"
+                        android:gravity="top"
+                        android:lineSpacingExtra="2dp"
+                        android:padding="10dp"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/cyber_green"
+                        android:textIsSelectable="true"
+                        android:textSize="10sp"/>
+            </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/cyber_footer_line"/>
+
+            <TextView
+                    android:id="@+id/bq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="openAuthorWebsite"
+                    android:text="@string/bq"
+                    android:textColor="@color/cyber_muted"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cyber_panel"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.06"
+            android:text="SERVER CONFIG"
+            android:textColor="@color/cyber_cyan"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="请输入后台监控端显示的配置数据"
+            android:textColor="@color/cyber_text"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="格式：192.168.1.22:8787/通讯密钥"
+            android:textColor="@color/cyber_muted"
+            android:textSize="12sp"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/cyber_footer_line"/>
+
+    <EditText
+            android:id="@+id/input_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/cyber_input"
+            android:hint="192.168.1.22:8787/xxxxxxxx"
+            android:inputType="textUri"
+            android:singleLine="true"
+            android:textColor="@color/cyber_text"
+            android:textColorHint="@color/cyber_muted"
+            android:textSize="14sp"/>
+</LinearLayout>
