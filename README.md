@@ -4,7 +4,7 @@ TC支付监控端是一个 Android 收款通知监控应用，主要用于学习
 
 感谢 [szvone/Vmq](https://github.com/szvone/Vmq) 和 [shinian-a/Vmq-App](https://github.com/shinian-a/Vmq-App) 两个项目的作者。本项目是在他们的代码基础上继续整理、重构和适配而来，保留了原有思路并结合当前需求做了调整。
 
-后台协作系统可免费注册使用：[paysys.thunder-cloud.online](https://paysys.thunder-cloud.online/)。如果需要私有化部署，可以单独联系作者 [576892817@qq.com](mailto:576892817@qq.com)。
+后台协作系统可免费注册使用：[paysys.thunder-cloud.online](https://paysys.thunder-cloud.online/)，支持多站点隔离接入支付。如果需要私有化部署，可以单独联系作者 [576892817@qq.com](mailto:576892817@qq.com)。
 
 <table>
   <tr>
