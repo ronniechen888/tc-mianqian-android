@@ -82,10 +82,30 @@ TC支付监控端是一个 Android 收款通知监控应用，主要用于学习
 5. 在 App 内发送测试心跳，后台状态显示“在线”即表示绑定成功。
 
 ![管理后台 - 监控端二维码](app/src/main/res/drawable/step2_1.png)
-![授权通知读取权限](app/src/main/res/drawable/step2_2.jpg)
-![开启自启动与后台运行](app/src/main/res/drawable/step2_3.jpg)
-![扫码绑定客户端](app/src/main/res/drawable/step2_4.jpg)
-![发送测试心跳](app/src/main/res/drawable/step2_5.jpg)
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="app/src/main/res/drawable/step2_2.jpg" alt="授权通知读取权限" />
+      <br />授权通知读取权限
+    </td>
+    <td align="center" width="50%">
+      <img src="app/src/main/res/drawable/step2_3.jpg" alt="开启自启动与后台运行" />
+      <br />开启自启动与后台运行
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="app/src/main/res/drawable/step2_4.jpg" alt="扫码绑定客户端" />
+      <br />扫码绑定客户端
+    </td>
+    <td align="center" width="50%">
+      <img src="app/src/main/res/drawable/step2_5.jpg" alt="发送测试心跳" />
+      <br />发送测试心跳
+    </td>
+  </tr>
+</table>
+
 ![后台在线状态](app/src/main/res/drawable/step2_6.png)
 
 ### 步骤 3：上传收款二维码
