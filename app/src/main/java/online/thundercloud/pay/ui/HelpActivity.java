@@ -12,7 +12,7 @@ import online.thundercloud.pay.R;
 
 public class HelpActivity extends AppCompatActivity {
 
-    private static final String HELP_URL = "https://paysys.thunder-cloud.online/tutorial";
+    private static final String HELP_URL = "https://tcpay.online/tutorial";
     private WebView helpWebView;
 
     

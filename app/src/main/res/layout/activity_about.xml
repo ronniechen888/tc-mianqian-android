@@ -194,7 +194,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="center"
-                    android:text="Copyright © 2026 paysys.thunder-cloud.online · 版权所有"
+                    android:text="Copyright © 2026 tcpay.online · 版权所有"
                     android:textColor="@color/cyber_muted"
                     android:textSize="13sp"/>
         </LinearLayout>

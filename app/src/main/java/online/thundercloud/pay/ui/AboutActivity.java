@@ -86,7 +86,7 @@ public class AboutActivity extends AppCompatActivity {
      */
     public static String getSoftwareIntroContent() {
         return "【ThunderCloud免签支付监控端】\n\n" +
-               "一款基于 V 免签方案开发的 Android 收款监听应用,主要是让刚起步的网站和门店顺利接入个人收款码和个人经营码，这里主要提供学学和测试使用。和该程序搭配的后台系统可以直接使用作者部署的网站: https://paysys.thunder-cloud.online 也可以联系作者进行私有化部署来达到更好的收款效果\n\n" +
+               "一款基于 V 免签方案开发的 Android 收款监听应用,主要是让刚起步的网站和门店顺利接入个人收款码和个人经营码，这里主要提供学学和测试使用。和该程序搭配的后台系统可以直接使用作者部署的网站: https://tcpay.online 也可以联系作者进行私有化部署来达到更好的收款效果\n\n" +
                "【核心功能】\n" +
                "• 双平台监听：支持支付宝和微信收款通知监听\n" +
                "• 智能回调：匹配服务端订单金额后自动触发回调\n" +
@@ -104,7 +104,7 @@ public class AboutActivity extends AppCompatActivity {
                "邮箱：576892817@qq.com\n\n" +
                "GitHub: https://github.com/ronniechen888/tc-mianqian-android\n\n" +
                "【版权声明】\n" +
-               "Copyright © 2026 paysys.thunder-cloud.online · 版权所有\n\n" +
+               "Copyright © 2026 tcpay.online · 版权所有\n\n" +
                "本项目基于 V 免签方案开发，感谢原作者的贡献。\n\n" +
                "【使用协议】\n" +
                "1. 本软件仅供学习交流使用\n" +

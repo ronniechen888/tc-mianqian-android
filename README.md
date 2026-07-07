@@ -4,7 +4,7 @@ TC支付监控端是一个 Android 收款通知监控应用，主要用于学习
 
 感谢 [szvone/Vmq](https://github.com/szvone/Vmq) 和 [shinian-a/Vmq-App](https://github.com/shinian-a/Vmq-App) 两个项目的作者。本项目是在他们的代码基础上继续整理、重构和适配而来，保留了原有思路并结合当前需求做了调整。
 
-后台协作系统可免费注册使用：[paysys.thunder-cloud.online](https://paysys.thunder-cloud.online/)，支持多站点隔离接入支付。如果需要私有化部署，可以单独联系作者 [576892817@qq.com](mailto:576892817@qq.com)。
+后台协作系统可免费注册使用：[tcpay.online](https://tcpay.online/)，支持多站点隔离接入支付。如果需要私有化部署，可以单独联系作者 [576892817@qq.com](mailto:576892817@qq.com)。
 
 <table>
   <tr>
@@ -196,7 +196,7 @@ public void service_start(View v) {
 
 ### 6. 教程页加载
 
-`HelpActivity` 使用系统 `WebView` 直接加载 [paysys.thunder-cloud.online/tutorial](https://paysys.thunder-cloud.online/tutorial)。实现上通过 `WebSettings` 打开 `JavaScript` 和 `DOM Storage`，再用 `WebViewClient` 控制页面在应用内打开，避免跳出外部浏览器。
+`HelpActivity` 使用系统 `WebView` 直接加载 [tcpay.online/tutorial](https://tcpay.online/tutorial)。实现上通过 `WebSettings` 打开 `JavaScript` 和 `DOM Storage`，再用 `WebViewClient` 控制页面在应用内打开，避免跳出外部浏览器。
 
 相关 API：
 
@@ -235,7 +235,7 @@ public void service_start(View v) {
 
 在线教程地址：
 
-[paysys.thunder-cloud.online/tutorial](https://paysys.thunder-cloud.online/tutorial)
+[tcpay.online/tutorial](https://tcpay.online/tutorial)
 
 ## 使用说明
 
@@ -293,7 +293,7 @@ public void service_start(View v) {
 
 在后台的文档页里找到当前应用的 `App ID` 和 `App Secret`，再把它们配置到你的网站、商城或自定义系统中。完成后，用一笔小额订单测试整个“创建订单 -> 扫码支付 -> 安卓监听 -> 后台回调”的链路。
 
-后台管理系统可免费注册使用：[paysys.thunder-cloud.online](https://paysys.thunder-cloud.online/)。如果需要私有化部署，可以单独联系作者 [576892817@qq.com](mailto:576892817@qq.com)。
+后台管理系统可免费注册使用：[tcpay.online](https://tcpay.online/)。如果需要私有化部署，可以单独联系作者 [576892817@qq.com](mailto:576892817@qq.com)。
 
 ## 构建说明
 
