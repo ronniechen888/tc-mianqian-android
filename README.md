@@ -63,6 +63,44 @@ TC支付监控端是一个 Android 收款通知监控应用，主要用于学习
 
 `https://paysys.thunder-cloud.online/tutorial`
 
+## 使用说明
+
+### 步骤 1：注册并登录商户后台
+
+访问后台后先注册账号并登录，系统会自动生成默认应用。你可以在系统设置里修改应用名称，也可以在同一商户下创建多个应用，做到不同业务独立隔离。
+
+![后台登录界面](app/src/main/res/drawable/step1_1.png)
+![商户注册界面](app/src/main/res/drawable/step1_2.png)
+![应用配置与系统设置](app/src/main/res/drawable/step1_3.png)
+
+### 步骤 2：配置并绑定安卓监控端 App
+
+1. 下载并安装安卓监控端。
+2. 开启通知读取权限，允许监听微信和支付宝通知。
+3. 将 App 加入电池优化白名单，并开启后台运行和自启动权限。
+4. 在后台的“监控端”页面扫描绑定二维码。
+5. 在 App 内发送测试心跳，后台状态显示“在线”即表示绑定成功。
+
+![管理后台 - 监控端二维码](app/src/main/res/drawable/step2_1.png)
+![授权通知读取权限](app/src/main/res/drawable/step2_2.jpg)
+![开启自启动与后台运行](app/src/main/res/drawable/step2_3.jpg)
+![扫码绑定客户端](app/src/main/res/drawable/step2_4.jpg)
+![发送测试心跳](app/src/main/res/drawable/step2_5.jpg)
+![后台在线状态](app/src/main/res/drawable/step2_6.png)
+
+### 步骤 3：上传收款二维码
+
+先在系统设置里配置通用收款码作为兜底，再在二维码管理里添加固定金额收款码。系统会优先匹配固定金额码，未命中时回退到通用收款码。
+
+![配置通用收款码](app/src/main/res/drawable/step3_1.png)
+![添加固定金额收款码](app/src/main/res/drawable/step3_2.png)
+
+### 步骤 4：网站系统对接
+
+在后台的文档页里找到当前应用的 `App ID` 和 `App Secret`，再把它们配置到你的网站、商城或自定义系统中。完成后，用一笔小额订单测试整个“创建订单 -> 扫码支付 -> 安卓监听 -> 后台回调”的链路。
+
+后台管理系统可免费注册使用：`https://paysys.thunder-cloud.online/`。如果需要私有化部署，可以单独联系作者。
+
 ## 构建说明
 
 Debug 包：
